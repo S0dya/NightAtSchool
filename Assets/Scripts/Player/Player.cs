@@ -35,7 +35,6 @@ public class Player : SingletonMonobehaviour<Player>
     //Input
     void Update()
     {
-        Debug.Log(gravityVelocity);
         if (!controller.isGrounded)
         {
             gravityVelocity.y -= gravityForce * Time.deltaTime;
@@ -83,7 +82,6 @@ public class Player : SingletonMonobehaviour<Player>
         while (true)
         {
             //x
-            Debug.Log(POVJoystick.Direction.x);
             transform.Rotate(new Vector3(0f, (POVJoystick.Direction.x * rotationSpeed), 0f), Space.Self);
             //y
             verticalAngle += -POVJoystick.Direction.y * rotationSpeed;
