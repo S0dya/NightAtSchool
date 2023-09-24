@@ -1,0 +1,81 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GameManager : SingletonMonobehaviour<GameManager>
+{
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        LoadData();
+        //Settings.firstTime = false;
+
+    }
+
+    //UI
+    public void Open(CanvasGroup CG, float duration)
+    {
+        CG.blocksRaycasts = true;
+        LTDescr tween = LeanTween.alphaCanvas(CG, 1, duration).setEase(LeanTweenType.easeInOutQuad);
+        tween.setUseEstimatedTime(true);
+    }
+    public void Close(CanvasGroup CG, float duration)
+    {
+        LTDescr tween = LeanTween.alphaCanvas(CG, 0, duration).setEase(LeanTweenType.easeInOutQuad).setOnComplete(() => CloseComletely(CG));
+        tween.setUseEstimatedTime(true);
+    }
+    void CloseComletely(CanvasGroup CG)
+    {
+        CG.blocksRaycasts = false;
+    }
+
+    public void FadeIn(CanvasGroup CG, float durationStart)
+    {
+        LeanTween.alphaCanvas(CG, 1f, durationStart).setEase(LeanTweenType.easeInOutQuad);
+    }
+    public void FadeInAndOut(CanvasGroup CG, float durationStart, float durationEnd)
+    {
+        LeanTween.alphaCanvas(CG, 1f, durationStart).setEase(LeanTweenType.easeInOutQuad).setOnComplete(() => FadeOut(CG, durationEnd));
+    }
+    public void FadeOut(CanvasGroup CG, float durationEnd)
+    {
+        LeanTween.alphaCanvas(CG, 0f, durationEnd).setEase(LeanTweenType.easeInOutQuad);
+    }
+
+    //save/load
+    void OnApplicationPause(bool pauseStatus)
+    {
+        if (pauseStatus)
+        {
+            SaveData();
+        }
+    }
+
+    void OnApplicationFocus(bool hasFocus)
+    {
+        if (!hasFocus)
+        {
+            SaveData();
+        }
+    }
+
+    void OnApplicationQuit()
+    {
+        SaveData();
+    }
+
+    public void SaveData()
+    {
+        //int/float
+        //bool
+        //PlayerPrefs.SetInt("firstTime", Settings.firstTime ? 0 : 1);
+    }
+
+    public void LoadData() 
+    {
+        //Settings.firstTime = (PlayerPrefs.GetInt("firstTime") == 0);
+    }
+
+}

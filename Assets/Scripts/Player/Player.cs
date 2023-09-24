@@ -14,6 +14,7 @@ public class Player : SingletonMonobehaviour<Player>
     [SerializeField] Camera playerCamera;
     [SerializeField] FixedJoystick movemenetJoystick;
     [SerializeField] FloatingJoystick POVJoystick;
+    [SerializeField] Animator animator;
 
 
     //local
@@ -49,10 +50,12 @@ public class Player : SingletonMonobehaviour<Player>
 
     public void StartMoving()
     {
+        animator.Play("Walking");
         movementCor = StartCoroutine(MovementCor());
     }
     public void StopMoving()
     {
+        animator.Play("IDLE");
         StopCoroutine(movementCor);
         characterVelocity = Vector3.zero;
     }
@@ -89,5 +92,20 @@ public class Player : SingletonMonobehaviour<Player>
             playerCamera.transform.localEulerAngles = new Vector3(verticalAngle, 0, 0);
             yield return null;
         }
+    }
+
+    //sound
+    public void PlayStepSound()
+    {
+        if (controller.isGrounded)
+        {
+            //PlaySound;
+        }
+    }
+
+    //gameover
+    public void Die()
+    {
+
     }
 }

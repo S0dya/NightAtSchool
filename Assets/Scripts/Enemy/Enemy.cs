@@ -5,6 +5,14 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    [Header("Settings")]
+    public float stopDistance;
+    public float chooseRandomTargetMinTime;
+    public float chooseRandomTargetMaxTime;
+
+    public float stopFollowingPlayerMaxTime;
+    public float stopFollowingPlayerMinTime;
+
     [Header("SerializeFields")]
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator animator;
@@ -13,26 +21,23 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] List<Transform> patrolPoints;
 
-    [Header("Settings")]
-    public float stopDistance;
-    public float chooseRandomTargetMin;
-    public float chooseRandomTargetMax;
-
-    public float fovAngle;
-    public float raycastDistance;
-
-
+    
     //coroutines
     Coroutine walkCor;
     Coroutine chooseNextTargetCor;
+    Coroutine stopFollowingPlayerCor;
 
     //public
-    [HideInInspector] bool seesPlayer;
+    [HideInInspector] public bool isFollowingPlayer;
+    [HideInInspector] public bool heardSound;
 
     //local
     Transform target;
     Vector3 targetPosition;
     int curPatrolPointIndex = 0;
+
+    Vector3 velocity;
+    Vector3 lastPosition;
 
     bool isIdle = true;
 
@@ -43,7 +48,19 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        ChooseNextTarget();
+        ChooseNextTarget(null);
+    }
+
+    void Update()
+    {
+        Vector3 currentPosition = agent.transform.position;
+        velocity = (currentPosition - lastPosition) / Time.deltaTime;
+        lastPosition = currentPosition;
+
+        if (!isIdle)
+        {
+            animator.speed = velocity.magnitude / 4;
+        }
     }
 
     //walking
@@ -73,65 +90,77 @@ public class Enemy : MonoBehaviour
             yield return null;
         }
 
-        ChooseNextTarget();
+        ChooseNextTarget(null);
     }
 
-    void ChooseNextTarget()
+    public void ChooseNextTarget(Transform transform)
     {
         if (chooseNextTargetCor != null) StopCoroutine(chooseNextTargetCor);
-        chooseNextTargetCor = StartCoroutine(ChooseNextTargetCor());
-    }
-    IEnumerator ChooseNextTargetCor()
-    {
-        if (seesPlayer)
+
+        if (transform != null)
         {
-            target = playerTransform;
+            target = transform;
+
+            StartWalking();
         }
         else
         {
-            if (walkCor != null) StopCoroutine(walkCor);
-            animator.Play("IDLE");
-            isIdle = true;
-
-            yield return new WaitForSeconds(Random.Range(chooseRandomTargetMin, chooseRandomTargetMax));
-
-            Transform temp = patrolPoints[^1];
-            patrolPoints[^1] = patrolPoints[curPatrolPointIndex];
-            patrolPoints[curPatrolPointIndex] = temp;
-
-            curPatrolPointIndex = Random.Range(0, patrolPoints.Count - 1);
-            Debug.Log(curPatrolPointIndex);
-            target = patrolPoints[curPatrolPointIndex];
+            chooseNextTargetCor = StartCoroutine(ChooseNextTargetCor());
         }
+    }
+    IEnumerator ChooseNextTargetCor()
+    {
+        if (walkCor != null) StopCoroutine(walkCor);
+        animator.Play("IDLE");
+        isIdle = true;
+        animator.speed = 1;
+
+        yield return new WaitForSeconds(Random.Range(chooseRandomTargetMinTime, chooseRandomTargetMaxTime));
+
+        Transform temp = patrolPoints[^1];
+        patrolPoints[^1] = patrolPoints[curPatrolPointIndex];
+        patrolPoints[curPatrolPointIndex] = temp;
+
+        curPatrolPointIndex = Random.Range(0, patrolPoints.Count - 1);
+        target = patrolPoints[curPatrolPointIndex];
 
         StartWalking();
     }
 
-    //enemy - player
-    void OnTriggerStay(Collider collision)
+    //soundsTrigger
+    public void OnHearSound(Transform transform)
     {
-        if (collision.CompareTag("Player"))
+        if (!isFollowingPlayer)
         {
-            Vector3 directionToPlayer = playerTransform.position - transform.position;
-            float angle = Vector3.Angle(directionToPlayer, transform.forward);
+            ChooseNextTarget(transform);
+        }
+    }
 
-            if (angle <= fovAngle * 0.5f)
-            {
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position, directionToPlayer, out hit, raycastDistance))
-                {
-                    if (hit.collider.CompareTag("Player"))
-                    {
-                        Debug.Log("Player detected!");
-                        seesPlayer = true;
-                        ChooseNextTarget();
-                    }
-                    else
-                    {
-                        Debug.Log("Obstacle detected.");
-                    }
-                }
-            }
+    //enemy - player
+    public void ToggleFollowingPlayer(bool val)
+    {
+        if (val)
+        {
+            if (stopFollowingPlayerCor != null) StopCoroutine(stopFollowingPlayerCor);
+            ChooseNextTarget(playerTransform);
+        }
+        else
+        {
+            stopFollowingPlayerCor = StartCoroutine(StopFollowingPlayerCor());
+        }
+    }
+    IEnumerator StopFollowingPlayerCor()
+    {
+        yield return new WaitForSeconds(Random.Range(stopFollowingPlayerMinTime, stopFollowingPlayerMaxTime));
+        isFollowingPlayer = false;
+        agent.SetDestination(transform.position);
+    }
+
+    void OnTriggerEnter(Collider collision)
+    {
+        if (collision.CompareTag("Player") && isFollowingPlayer)
+        {
+            //Screamer();
         }
     }
 }
