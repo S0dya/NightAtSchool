@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6776699395313366148}
+  - component: {fileID: 6776699395313366145}
   - component: {fileID: 6776699395313366144}
   - component: {fileID: 6776699395313366151}
   - component: {fileID: 6776699395313366150}
   - component: {fileID: 6776699395313366149}
-  - component: {fileID: 6776699395313366145}
   m_Layer: 13
   m_Name: Key
   m_TagString: Pickable
@@ -36,6 +36,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 2.49, z: 45.81}
+--- !u!114 &6776699395313366145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6776699395313366155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30b2d055245e4964da5122cfd80990a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0
+  type: 1
+  name: Key
+  actionSound: 
+  animator: {fileID: 0}
 --- !u!33 &6776699395313366144
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -115,20 +132,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.03124655, y: 0.04191272, z: 0.0051341527}
   m_Center: {x: 0.0069630216, y: -0.010956359, z: 0.000010896241}
---- !u!114 &6776699395313366145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6776699395313366155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30b2d055245e4964da5122cfd80990a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  index: 0
-  type: 1
-  name: Key
-  actionSound: 
-  animator: {fileID: 0}

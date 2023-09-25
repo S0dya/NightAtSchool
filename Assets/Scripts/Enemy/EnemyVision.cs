@@ -5,7 +5,9 @@ using UnityEngine;
 public class EnemyVision : MonoBehaviour
 {
     [SerializeField] Transform playerTransform;
-    [SerializeField] Enemy enemy;
+    [SerializeField] Enemy enemy; 
+    [SerializeField] int playerLayer;
+    [SerializeField] int obstacleLayer;
 
     public float fovAngle;
     public float raycastDistance;
@@ -24,7 +26,7 @@ public class EnemyVision : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, directionToPlayer, out hit, raycastDistance))
                 {
-                    if (hit.collider.CompareTag("Player"))
+                    if (hit.collider.gameObject.layer == playerLayer)
                     {
                         if (!enemy.isFollowingPlayer)
                         {
@@ -36,13 +38,11 @@ public class EnemyVision : MonoBehaviour
                             enemy.ToggleFollowingPlayer(true);
                         }
                     }
-                    else
+                    else if (hit.collider.gameObject.layer == obstacleLayer)
                     {
-                        Debug.Log("doeasnt see ");
                         if (seesPlayer)
                         {
-                            seesPlayer = false;
-                            enemy.ToggleFollowingPlayer(false);
+                            StopSeeingPlayer();
                         }
                     }
                 }
@@ -52,11 +52,16 @@ public class EnemyVision : MonoBehaviour
 
     void OnTriggerExit(Collider collision)
     {
-        if (collision.CompareTag("Player") && seesPlayer)
+        if (collision.gameObject.layer == playerLayer && seesPlayer)
         {
-            seesPlayer = false;
-            enemy.ToggleFollowingPlayer(false);
+            StopSeeingPlayer();
         }
+    }
+
+    void StopSeeingPlayer()
+    {
+        seesPlayer = false;
+        enemy.ToggleFollowingPlayer(false);
     }
 
     public void SawPlayer()

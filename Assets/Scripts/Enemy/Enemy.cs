@@ -153,7 +153,7 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(Random.Range(stopFollowingPlayerMinTime, stopFollowingPlayerMaxTime));
         isFollowingPlayer = false;
-        agent.SetDestination(transform.position);
+        target = transform;
     }
 
     void OnTriggerEnter(Collider collision)

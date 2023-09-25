@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHands : SingletonMonobehaviour<PlayerHands>
 {
+    [SerializeField] CanvasGroup dropButtonCG;
+
     [SerializeField] GameObject[] handsObjects;
     [SerializeField] GameObject[] sceneObjects;
 
@@ -22,12 +25,18 @@ public class PlayerHands : SingletonMonobehaviour<PlayerHands>
 
     }
 
+    void Start()
+    {
+        UnSetItem();
+    }
+
     public void SetItem(int index, int type)
     {
-        if (curTypeOfUsage != -1) DropItem();
+        if (indexOfHandObject != -1) DropItem();
 
         indexOfHandObject = index;
         curTypeOfUsage = type;
+        GameManager.I.Open(dropButtonCG, 0.4f);
 
         ToggleHandObject(true);
     }
@@ -35,6 +44,7 @@ public class PlayerHands : SingletonMonobehaviour<PlayerHands>
     {
         indexOfHandObject = -1;
         curTypeOfUsage = -1;
+        GameManager.I.Close(dropButtonCG, 0.01f);
     }
 
     public void DropItem()
@@ -43,8 +53,6 @@ public class PlayerHands : SingletonMonobehaviour<PlayerHands>
         GameObject sceneObj = Instantiate(sceneObjects[indexOfHandObject], initialPosition.position, Quaternion.identity, objectParent);
         Rigidbody sceneObjRB = sceneObj.GetComponent<Rigidbody>();
         sceneObjRB.AddForce(transform.forward.normalized * 5, ForceMode.Impulse);
-
-        UnSetItem();
     }
     public bool UseItem(int index)
     {

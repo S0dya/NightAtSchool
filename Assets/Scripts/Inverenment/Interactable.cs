@@ -41,11 +41,13 @@ public class Interactable : MonoBehaviour
     void OpenInteraction()
     {
         animator.Play("Interaction");
+        DestroyObject();
     }
 
     void PickInteraction()
     {
         PlayerHands.I.SetItem(index, type);
+        DestroyObject();
     }
 
     void OpenWithItemInteraction()
@@ -53,6 +55,9 @@ public class Interactable : MonoBehaviour
         if (PlayerHands.I.UseItem(index))
         {
             animator.Play("Interaction");
+            DestroyObject();
         }
     }
+
+    void DestroyObject() => Destroy(gameObject);
 }

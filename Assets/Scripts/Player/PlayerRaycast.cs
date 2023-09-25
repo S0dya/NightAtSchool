@@ -6,17 +6,17 @@ using TMPro;
 
 public class PlayerRaycast : MonoBehaviour
 {
+    [Header("Settings")]
+    public float interactionAngle;
+    public float raycastDistance;
+    
+    [Header("SerializeFields")]
     [SerializeField] Camera camera;
 
     [SerializeField] CanvasGroup interactionCG;
     [SerializeField] TextMeshProUGUI interactionNameText;
     [SerializeField] TextMeshProUGUI interactionButtonText;
-    [SerializeField] int indexOfLayer;
-
-
-    [Header("Settings")]
-    public float interactionAngle;
-    public float raycastDistance;
+    [SerializeField] int interactableLayer;
 
     //local
     bool isInteracting;
@@ -25,15 +25,15 @@ public class PlayerRaycast : MonoBehaviour
     Coroutine playerRaycastCor;
     
     [SerializeField] 
-    List<Transform> pickableTransforms;
+    List<Transform> interactableTransforms;
     Transform nearestObj;
 
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.layer == indexOfLayer && !pickableTransforms.Contains(collision.transform))
+        if (collision.gameObject.layer == interactableLayer && !interactableTransforms.Contains(collision.transform))
         {
-            pickableTransforms.Add(collision.transform);
-            if (pickableTransforms.Count == 1)
+            interactableTransforms.Add(collision.transform);
+            if (interactableTransforms.Count == 1)
             {
                 TogglePlayerRaycastCor(true);
             }
@@ -41,13 +41,9 @@ public class PlayerRaycast : MonoBehaviour
     }
     void OnTriggerExit(Collider collision)
     {
-        if (collision.gameObject.layer == indexOfLayer && pickableTransforms.Contains(collision.transform))
+        if (collision.gameObject.layer == interactableLayer && interactableTransforms.Contains(collision.transform))
         {
-            pickableTransforms.Remove(collision.transform);
-            if (pickableTransforms.Count == 0)
-            {
-                TogglePlayerRaycastCor(false);
-            }
+            RemoveTransform(collision.transform);
         }
     }
 
@@ -64,7 +60,7 @@ public class PlayerRaycast : MonoBehaviour
             float shortestDistance = Mathf.Infinity;
             Vector3 cameraPosition = camera.transform.position;
 
-            foreach (Transform transform in pickableTransforms)
+            foreach (Transform transform in interactableTransforms)
             {
                 float distanceToObj = (transform.position - cameraPosition).magnitude;
 
@@ -126,5 +122,18 @@ public class PlayerRaycast : MonoBehaviour
         if (curInteractable == null) return; //deler
 
         curInteractable.Interact();
+
+        RemoveTransform(nearestObj);
+    }
+
+    void RemoveTransform(Transform transform)
+    {
+        interactableTransforms.Remove(transform);
+        if (interactableTransforms.Count == 0)
+        {
+            TogglePlayerRaycastCor(false);
+
+            if (isInteracting) UnSetInteract();
+        }
     }
 }
