@@ -6,65 +6,125 @@ using TMPro;
 
 public class PlayerRaycast : MonoBehaviour
 {
-    [SerializeField] LayerMask interactableLayer;
-    [SerializeField] CanvasGroup interactionTextCG;
-    [SerializeField] TextMeshProUGUI interactionText;
+    [SerializeField] Camera camera;
 
+    [SerializeField] CanvasGroup interactionCG;
+    [SerializeField] TextMeshProUGUI interactionNameText;
+    [SerializeField] TextMeshProUGUI interactionButtonText;
+    [SerializeField] int indexOfLayer;
+
+
+    [Header("Settings")]
+    public float interactionAngle;
     public float raycastDistance;
+
+    //local
     bool isInteracting;
+    Interactable curInteractable;
 
-    void OnTriggerStay(Collider collision)
+    Coroutine playerRaycastCor;
+    
+    [SerializeField] 
+    List<Transform> pickableTransforms;
+    Transform nearestObj;
+
+    void OnTriggerEnter(Collider collision)
     {
-        Debug.Log(collision.gameObject.layer);
-        if (collision.gameObject.layer == interactableLayer)
+        if (collision.gameObject.layer == indexOfLayer && !pickableTransforms.Contains(collision.transform))
         {
-            Vector3 directionToPickable = collision.transform.position - transform.position;
-            float angle = Vector3.Angle(transform.forward, directionToPickable);
-
-            Debug.Log("1");
-
-            if (angle < 45f)
+            pickableTransforms.Add(collision.transform);
+            if (pickableTransforms.Count == 1)
             {
-                Debug.Log("2");
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position, directionToPickable, out hit, raycastDistance))
-                {
-                    Debug.Log("3");
-                    if (hit.collider.CompareTag("Pickable") || hit.collider.CompareTag("Interactable"))
-                    {
-                        Debug.Log("4");
-                        if (!isInteracting)
-                        {
-                            Debug.Log("5");
-                            Interactable interactable = collision.gameObject.GetComponent<Interactable>();
-                            SetInteract(interactable.actionName);
-                        }
-                    }
-                    else
-                    {
-                        Debug.Log("6");
-                        if (isInteracting)
-                        {
-                            Debug.Log("7");
-                            UnSetInteract();
-                        }
-                    }
-                }
+                TogglePlayerRaycastCor(true);
+            }
+        }
+    }
+    void OnTriggerExit(Collider collision)
+    {
+        if (collision.gameObject.layer == indexOfLayer && pickableTransforms.Contains(collision.transform))
+        {
+            pickableTransforms.Remove(collision.transform);
+            if (pickableTransforms.Count == 0)
+            {
+                TogglePlayerRaycastCor(false);
             }
         }
     }
 
-    void SetInteract(string text)
+    void TogglePlayerRaycastCor(bool val)
+    {
+        if (val) playerRaycastCor = StartCoroutine(PlayerRaycastCor());
+        else if (playerRaycastCor != null) StopCoroutine(playerRaycastCor);
+    }
+
+    IEnumerator PlayerRaycastCor()
+    {
+        while (true)
+        {
+            float shortestDistance = Mathf.Infinity;
+            Vector3 cameraPosition = camera.transform.position;
+
+            foreach (Transform transform in pickableTransforms)
+            {
+                float distanceToObj = (transform.position - cameraPosition).magnitude;
+
+                if (distanceToObj < shortestDistance)
+                {
+                    shortestDistance = distanceToObj;
+                    nearestObj = transform;
+                }
+            }
+
+            Vector3 directionToPickable = nearestObj.transform.position - cameraPosition;
+            float angle = Vector3.Angle(camera.transform.forward, directionToPickable);
+
+            if (angle < interactionAngle)
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(cameraPosition, directionToPickable, out hit, raycastDistance))
+                {
+                    if (!isInteracting)
+                    {
+                        Interactable interactable = nearestObj.GetComponent<Interactable>();
+                        curInteractable = interactable;
+                        SetInteract(interactable.name, Settings.interactionNames[interactable.type]);
+                    }
+                }
+                else if (isInteracting)
+                {
+                    UnSetInteract();
+                }
+            }
+            else if (isInteracting)
+            {
+                UnSetInteract();
+            }
+
+            yield return null;
+        }
+    }
+
+    void SetInteract(string nameText, string interactionText)
     {
         isInteracting = true;
-        interactionText.text = text;
-        GameManager.I.FadeIn(interactionTextCG, 0.1f);
+        interactionNameText.text = nameText;
+        interactionButtonText.text = interactionText;
+        GameManager.I.Open(interactionCG, 0.1f);
     }
 
     void UnSetInteract()
     {
+        curInteractable = null;
         isInteracting = false;
-        interactionText.text = "";
-        GameManager.I.FadeOut(interactionTextCG, 0.1f);
+        interactionNameText.text = "";
+        interactionButtonText.text = "";
+        GameManager.I.Close(interactionCG, 0.1f);
+    }
+
+    public void Interact()
+    {
+        if (curInteractable == null) return; //deler
+
+        curInteractable.Interact();
     }
 }

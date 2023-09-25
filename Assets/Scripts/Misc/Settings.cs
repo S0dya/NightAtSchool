@@ -6,4 +6,7 @@ public static class Settings
 {
     //game save logic
     public static bool firstTime;
+
+    //UI
+    public static string[] interactionNames = { "Open", "Pick up", "Open" };
 }
