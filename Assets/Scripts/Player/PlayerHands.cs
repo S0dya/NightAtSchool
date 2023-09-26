@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerHands : SingletonMonobehaviour<PlayerHands>
 {
+    [Header("SerializeFields")]
     [SerializeField] CanvasGroup dropButtonCG;
 
     [SerializeField] GameObject[] handsObjects;
@@ -17,7 +19,9 @@ public class PlayerHands : SingletonMonobehaviour<PlayerHands>
     [HideInInspector] public int indexOfHandObject = -1;
     [HideInInspector] public int curTypeOfUsage = -1;//1pickable, 2intrectableWithPickable
 
-
+    [Header("after interaction")]
+    [SerializeField] CanvasGroup afterInteractionCG;
+    [SerializeField] TextMeshProUGUI afterInteractionText;
 
     protected override void Awake()
     {
@@ -52,17 +56,20 @@ public class PlayerHands : SingletonMonobehaviour<PlayerHands>
         ToggleHandObject(false);
         GameObject sceneObj = Instantiate(sceneObjects[indexOfHandObject], initialPosition.position, Quaternion.identity, objectParent);
         Rigidbody sceneObjRB = sceneObj.GetComponent<Rigidbody>();
-        sceneObjRB.AddForce(transform.forward.normalized * 5, ForceMode.Impulse);
+        sceneObjRB.AddForce(transform.forward.normalized * 4, ForceMode.Impulse);
     }
     public bool UseItem(int index)
     {
         if (index == indexOfHandObject + 100)
         {
             ToggleHandObject(false);
+            UnSetItem();
 
             return true;
         }
 
+        afterInteractionText.text = "closed";
+        GameManager.I.FadeInAndOut(afterInteractionCG, 0.8f, 1f);
         return false;
     }
 

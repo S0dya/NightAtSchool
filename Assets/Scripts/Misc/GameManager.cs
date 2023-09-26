@@ -17,8 +17,11 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     //UI
     public void Open(CanvasGroup CG, float duration)
     {
-        LTDescr tween = LeanTween.alphaCanvas(CG, 1, duration).setEase(LeanTweenType.easeInOutQuad);
+        LTDescr tween = LeanTween.alphaCanvas(CG, 1, duration).setEase(LeanTweenType.easeInOutQuad).setOnComplete(() => OpenCompletely(CG));
         tween.setUseEstimatedTime(true);
+    }
+    void OpenCompletely(CanvasGroup CG)
+    {
         CG.blocksRaycasts = true;
     }
     public void Close(CanvasGroup CG, float duration)

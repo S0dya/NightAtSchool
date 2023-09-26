@@ -8,5 +8,5 @@ public static class Settings
     public static bool firstTime;
 
     //UI
-    public static string[] interactionNames = { "Open", "Pick up", "Open" };
+    public static string[] interactionNames = { "Open", "Pick up", "Open", "Open" };
 }

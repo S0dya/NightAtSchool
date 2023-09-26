@@ -16,6 +16,7 @@ public class PlayerRaycast : MonoBehaviour
     [SerializeField] CanvasGroup interactionCG;
     [SerializeField] TextMeshProUGUI interactionNameText;
     [SerializeField] TextMeshProUGUI interactionButtonText;
+    [SerializeField] Image interactionImage;
     [SerializeField] int interactableLayer;
 
     //local
@@ -57,16 +58,17 @@ public class PlayerRaycast : MonoBehaviour
     {
         while (true)
         {
-            float shortestDistance = Mathf.Infinity;
+            float shortestAngle = Mathf.Infinity;
             Vector3 cameraPosition = camera.transform.position;
 
             foreach (Transform transform in interactableTransforms)
             {
-                float distanceToObj = (transform.position - cameraPosition).magnitude;
+                Vector3 directionToCurPickable = transform.position - cameraPosition;
+                float curAngle = Vector3.Angle(camera.transform.forward, directionToCurPickable);
 
-                if (distanceToObj < shortestDistance)
+                if (curAngle < shortestAngle)
                 {
-                    shortestDistance = distanceToObj;
+                    shortestAngle = curAngle;
                     nearestObj = transform;
                 }
             }
@@ -102,19 +104,15 @@ public class PlayerRaycast : MonoBehaviour
 
     void SetInteract(string nameText, string interactionText)
     {
-        isInteracting = true;
-        interactionNameText.text = nameText;
-        interactionButtonText.text = interactionText;
-        GameManager.I.Open(interactionCG, 0.1f);
+        ToggleInteraction(nameText, interactionText);
+        GameManager.I.Open(interactionCG, 0.3f);
     }
 
     void UnSetInteract()
     {
+        ToggleInteraction(null, null);
         curInteractable = null;
-        isInteracting = false;
-        interactionNameText.text = "";
-        interactionButtonText.text = "";
-        GameManager.I.Close(interactionCG, 0.1f);
+        GameManager.I.Close(interactionCG, 0.3f);
     }
 
     public void Interact()
@@ -135,5 +133,13 @@ public class PlayerRaycast : MonoBehaviour
 
             if (isInteracting) UnSetInteract();
         }
+    }
+    
+    void ToggleInteraction(string nameText, string interactionText)
+    {
+        isInteracting = nameText != null;
+        interactionImage.enabled = nameText != null;
+        interactionNameText.text = nameText;
+        interactionButtonText.text = interactionText;
     }
 }
