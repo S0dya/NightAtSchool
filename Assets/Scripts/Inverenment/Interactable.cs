@@ -7,16 +7,18 @@ using UnityEngine.Events;
 public class Interactable : MonoBehaviour
 {
     public int index;
-    public int type;//door open, pick, locked door object needed, ui interaction
+    public int type;//door open, pick, locked door object needed, ui interaction, hide
 
     public string name;
     public string actionSound;
 
     [SerializeField] Animator animator;
 
-    [Header("type = 3")]
-    public CanvasGroup cg;
+    //type == 3
     bool opened = false;
+
+    [Header("type = 4")]
+    [SerializeField] Vector3 hidePosition;
 
 
     System.Action interaction;
@@ -36,6 +38,9 @@ public class Interactable : MonoBehaviour
                 break;
             case 3:
                 interaction = OpenWithUIInteraction;
+                break;
+            case 4:
+                interaction = HideInteraction;
                 break;
             default:
                 break;
@@ -71,6 +76,11 @@ public class Interactable : MonoBehaviour
     void OpenWithUIInteraction()
     {
         InGameUI.I.UIInteraction(this);
+    }
+
+    void HideInteraction()
+    {
+        InGameUI.I.OpenHideInteraction(this);
     }
 
     //outside method for UI

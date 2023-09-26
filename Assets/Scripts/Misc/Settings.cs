@@ -9,4 +9,7 @@ public static class Settings
 
     //UI
     public static string[] interactionNames = { "Open", "Pick up", "Open", "Open" };
+
+    //uiInteraction
+    public static int[] lockPassword = { 2, 4, 1, 8 };
 }
