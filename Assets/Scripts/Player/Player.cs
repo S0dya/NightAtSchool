@@ -15,6 +15,7 @@ public class Player : SingletonMonobehaviour<Player>
     [SerializeField] FixedJoystick movemenetJoystick;
     [SerializeField] FloatingJoystick POVJoystick;
     [SerializeField] Animator animator;
+    [SerializeField] BoxCollider raycastCollider;
 
 
     //local
@@ -103,9 +104,19 @@ public class Player : SingletonMonobehaviour<Player>
         }
     }
 
+    //hide interaction
+    public void ToggleHide(bool val)
+    {
+        controller.enabled = !val;
+        movemenetJoystick.gameObject.SetActive(!val);
+        raycastCollider.enabled = !val;
+    }
+
     //gameover
     public void Die()
     {
-
+        GameMenuUI.I.GameOver();
     }
+
+
 }

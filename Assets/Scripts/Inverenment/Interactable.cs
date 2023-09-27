@@ -9,7 +9,7 @@ public class Interactable : MonoBehaviour
     public int index;
     public int type;//door open, pick, locked door object needed, ui interaction, hide
 
-    public string name;
+    public string nameOfObj;
     public string actionSound;
 
     [SerializeField] Animator animator;
@@ -18,7 +18,9 @@ public class Interactable : MonoBehaviour
     bool opened = false;
 
     [Header("type = 4")]
-    [SerializeField] Vector3 hidePosition;
+    public Vector3 hidePosition;
+    public Quaternion hideRotation;
+    public Transform enemyTarget;
 
 
     System.Action interaction;

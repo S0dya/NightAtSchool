@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class InGameUI : SingletonMonobehaviour<InGameUI>
 {
+    [SerializeField] Player player;
+
     [Header("UI interaction")]
     [SerializeField] CanvasGroup interactionUIWindowCG;
     [SerializeField] GameObject[] UIInteractions;
@@ -13,7 +15,6 @@ public class InGameUI : SingletonMonobehaviour<InGameUI>
 
     //local uiInteraction
     int curGuess = 0;
-    int amountGuessed = 0;
 
     //lock 3x3 with buttons not interacable after interaction
     [SerializeField] Image[] passwordLock3x3IOAIButtonImages;
@@ -21,8 +22,8 @@ public class InGameUI : SingletonMonobehaviour<InGameUI>
 
     [Header("Hide")]
     [SerializeField] CanvasGroup inputUICG;
-    [SerializeField] CanvasGroup blackScreenCG;
-    Vector3 playerPosition;
+    [SerializeField] CanvasGroup HideInteractionCG;
+    Vector3 lastPlayerPosition;
 
     protected override void Awake()
     {
@@ -42,11 +43,14 @@ public class InGameUI : SingletonMonobehaviour<InGameUI>
     public void OpenHideInteraction(Interactable interactable)
     {
         curInteractable = interactable;
+        lastPlayerPosition = player.transform.position;
 
-        GameManager.I.Open(blackScreenCG, 0.1f);
-        GameManager.I.Close(inputUICG, 0f);
-        playerPosition = Player.I.transform.position;
+        if (Enemy.I.enemyVision.seesPlayer) ChangeTargetForEnemy();
 
+        player.ToggleHide(true);
+        GameManager.I.Open(HideInteractionCG, 0.1f);
+        player.transform.position = curInteractable.hidePosition;
+        player.transform.rotation = curInteractable.hideRotation;
     }
     public void CloseHideInteraction()
     {
@@ -66,7 +70,9 @@ public class InGameUI : SingletonMonobehaviour<InGameUI>
 
     public void ExitHideButton()
     {
-
+        player.transform.position = lastPlayerPosition;
+        GameManager.I.Close(HideInteractionCG, 0.1f);
+        player.ToggleHide(false);
     }
 
 
@@ -116,6 +122,11 @@ public class InGameUI : SingletonMonobehaviour<InGameUI>
         else GameManager.I.Close(interactionUIWindowCG, 0);
     }
 
+    void ChangeTargetForEnemy()
+    {
+        Enemy.I.ChooseNextTarget(curInteractable.enemyTarget);
+    }
+
     //UIInteractionMethods
-    
+
 }

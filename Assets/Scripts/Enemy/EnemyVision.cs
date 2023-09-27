@@ -12,7 +12,7 @@ public class EnemyVision : MonoBehaviour
     public float fovAngle;
     public float raycastDistance;
 
-    bool seesPlayer;
+    [HideInInspector] public bool seesPlayer;
 
     void OnTriggerStay(Collider collision)
     {

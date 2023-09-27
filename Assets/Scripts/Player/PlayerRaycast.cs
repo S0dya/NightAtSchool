@@ -11,7 +11,7 @@ public class PlayerRaycast : MonoBehaviour
     public float raycastDistance;
     
     [Header("SerializeFields")]
-    [SerializeField] Camera camera;
+    [SerializeField] Camera cam;
 
     [SerializeField] CanvasGroup interactionCG;
     [SerializeField] TextMeshProUGUI interactionNameText;
@@ -59,12 +59,12 @@ public class PlayerRaycast : MonoBehaviour
         while (true)
         {
             float shortestAngle = Mathf.Infinity;
-            Vector3 cameraPosition = camera.transform.position;
+            Vector3 cameraPosition = cam.transform.position;
 
             foreach (Transform transform in interactableTransforms)
             {
                 Vector3 directionToCurPickable = transform.position - cameraPosition;
-                float curAngle = Vector3.Angle(camera.transform.forward, directionToCurPickable);
+                float curAngle = Vector3.Angle(cam.transform.forward, directionToCurPickable);
 
                 if (curAngle < shortestAngle)
                 {
@@ -73,10 +73,11 @@ public class PlayerRaycast : MonoBehaviour
                 }
             }
 
-            Vector3 directionToPickable = nearestObj.transform.position - cameraPosition;
-            float angle = Vector3.Angle(camera.transform.forward, directionToPickable);
+            Vector3 directionToPickable = nearestObj.position - cameraPosition;
+            float angle = Vector3.Angle(cam.transform.forward, directionToPickable);
+            float angleMultiplayer = nearestObj.gameObject.CompareTag("HideInteractable") ? 3.5f : 1;
 
-            if (angle < interactionAngle)
+            if (angle < interactionAngle * angleMultiplayer)
             {
                 RaycastHit hit;
                 if (Physics.Raycast(cameraPosition, directionToPickable, out hit, raycastDistance))
@@ -85,7 +86,7 @@ public class PlayerRaycast : MonoBehaviour
                     {
                         Interactable interactable = nearestObj.GetComponent<Interactable>();
                         curInteractable = interactable;
-                        SetInteract(interactable.name, Settings.interactionNames[interactable.type]);
+                        SetInteract(interactable.nameOfObj, Settings.interactionNames[interactable.type]);
                     }
                 }
                 else if (isInteracting)

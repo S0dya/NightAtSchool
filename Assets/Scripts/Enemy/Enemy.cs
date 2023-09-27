@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public class Enemy : SingletonMonobehaviour<Enemy> //only one enemy
 {
     [Header("Settings")]
     public float stopDistance;
@@ -18,10 +18,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] Player player;
     [SerializeField] Transform playerTransform;
+    public EnemyVision enemyVision;
 
     [SerializeField] List<Transform> patrolPoints;
 
-    
     //coroutines
     Coroutine walkCor;
     Coroutine chooseNextTargetCor;
@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour
     //public
     [HideInInspector] public bool isFollowingPlayer;
     [HideInInspector] public bool heardSound;
+    [HideInInspector] public bool sawPlayerBeforeHiding;
 
     //local
     Transform target;
@@ -41,8 +42,9 @@ public class Enemy : MonoBehaviour
 
     bool isIdle = true;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
 
     }
 
@@ -84,6 +86,10 @@ public class Enemy : MonoBehaviour
 
             if (Vector3.Distance(transform.position, targetPosition) < stopDistance)
             {
+                if (sawPlayerBeforeHiding)
+                {
+                    Debug.Log("saw");
+                }
                 break;
             }
 
@@ -160,7 +166,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.CompareTag("Player") && isFollowingPlayer)
         {
-            //Screamer();
+            ScreamerUI.I.PlayScreamer();
         }
     }
 }
