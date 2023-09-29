@@ -67,6 +67,7 @@ public class EnemyVision : MonoBehaviour
     public void SawPlayer()
     {
         enemy.isFollowingPlayer = true;
+        enemy.sawPlayerBeforeHiding = false;
         enemy.ChooseNextTarget(playerTransform);
     }
 }

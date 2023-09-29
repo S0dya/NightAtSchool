@@ -52,10 +52,6 @@ public class InGameUI : SingletonMonobehaviour<InGameUI>
         player.transform.position = curInteractable.hidePosition;
         player.transform.rotation = curInteractable.hideRotation;
     }
-    public void CloseHideInteraction()
-    {
-
-    }
 
     //buttons
     public void EnterButton()
@@ -125,6 +121,7 @@ public class InGameUI : SingletonMonobehaviour<InGameUI>
     void ChangeTargetForEnemy()
     {
         Enemy.I.ChooseNextTarget(curInteractable.enemyTarget);
+        Enemy.I.sawPlayerBeforeHiding = true;
     }
 
     //UIInteractionMethods

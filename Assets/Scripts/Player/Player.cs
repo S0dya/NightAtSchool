@@ -24,6 +24,7 @@ public class Player : SingletonMonobehaviour<Player>
     Vector3 gravityVelocity;
 
     //cors
+    Coroutine gravityCor;
     Coroutine movementCor;
     Coroutine povCor;
 
@@ -34,21 +35,12 @@ public class Player : SingletonMonobehaviour<Player>
         
     }
 
-    //Input
-    void Update()
+    void Start()
     {
-        if (!controller.isGrounded)
-        {
-            gravityVelocity.y -= gravityForce * Time.deltaTime;
-        }
-        else
-        {
-            gravityVelocity.y = 0;
-        }
-
-        controller.Move((characterVelocity * movementSpeed + gravityVelocity) * Time.deltaTime);
+        gravityCor = StartCoroutine(GravityCor());
     }
 
+    //Input
     public void StartMoving()
     {
         animator.Play("Walking");
@@ -68,6 +60,18 @@ public class Player : SingletonMonobehaviour<Player>
     public void StopLooking()
     {
         StopCoroutine(povCor);
+    }
+
+    IEnumerator GravityCor()
+    {
+        while (true)
+        {
+            if (!controller.isGrounded) gravityVelocity.y -= gravityForce * Time.deltaTime;
+            else gravityVelocity.y = 0;
+            controller.Move((characterVelocity * movementSpeed + gravityVelocity) * Time.deltaTime);
+
+            yield return null; 
+        }
     }
 
     IEnumerator MovementCor()
@@ -107,9 +111,13 @@ public class Player : SingletonMonobehaviour<Player>
     //hide interaction
     public void ToggleHide(bool val)
     {
+        if (!val) gravityCor = StartCoroutine(GravityCor());
+        if (val) StopCoroutine(gravityCor);
+
         controller.enabled = !val;
         movemenetJoystick.gameObject.SetActive(!val);
         raycastCollider.enabled = !val;
+
     }
 
     //gameover

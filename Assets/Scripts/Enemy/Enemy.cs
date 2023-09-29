@@ -88,7 +88,8 @@ public class Enemy : SingletonMonobehaviour<Enemy> //only one enemy
             {
                 if (sawPlayerBeforeHiding)
                 {
-                    Debug.Log("saw");
+                    ScreamerUI.I.PlayScreamer();
+                    Destroy(gameObject);
                 }
                 break;
             }
@@ -164,9 +165,10 @@ public class Enemy : SingletonMonobehaviour<Enemy> //only one enemy
 
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.CompareTag("Player") && isFollowingPlayer)
+        if (collision.CompareTag("Player") && isFollowingPlayer && enemyVision.seesPlayer)
         {
             ScreamerUI.I.PlayScreamer();
+            Destroy(gameObject);
         }
     }
 }
