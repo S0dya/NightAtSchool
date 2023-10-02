@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1248189927
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1248189928}
+  m_Layer: 13
+  m_Name: HidePlace
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1248189928
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248189927}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0.31428534, y: -0.14285363, z: -0.8857142}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 292442346690015370}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &292442345572731599
 GameObject:
   m_ObjectHideFlags: 0
@@ -54,7 +85,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 292442345934179324}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -96,6 +127,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 292442345572731598}
+  - {fileID: 1248189928}
   m_Father: {fileID: 292442345934179327}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -116,8 +148,7 @@ MonoBehaviour:
   nameOfObj: Desk
   actionSound: 
   animator: {fileID: 0}
-  hidePosition: {x: -3.6, y: 0.175, z: 3.1}
-  hideRotation: {x: 0, y: 0, z: 0, w: 1}
+  hideTransform: {fileID: 1248189928}
   enemyTarget: {fileID: 292442345572731598}
 --- !u!65 &292442346690015372
 BoxCollider:
@@ -189,7 +220,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7850445651683118481}
-  m_Mesh: {fileID: 2502843528329499362, guid: 28b37090309ee034882a9e5a8c081bb1, type: 3}
+  m_Mesh: {fileID: 4300000, guid: af64fe8edf8956b43bac1ba450d7dbbf, type: 2}
 --- !u!23 &2752235578805656904
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -210,8 +241,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 28b37090309ee034882a9e5a8c081bb1, type: 3}
-  - {fileID: 4874126678125670354, guid: 28b37090309ee034882a9e5a8c081bb1, type: 3}
+  - {fileID: 2100000, guid: 6052311ad60d8314a851cf96a35d87ed, type: 2}
+  - {fileID: 2100000, guid: 0c6960c51d8947346b3caa0cb0823b45, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -49,8 +49,8 @@ public class InGameUI : SingletonMonobehaviour<InGameUI>
 
         player.ToggleHide(true);
         GameManager.I.Open(HideInteractionCG, 0.1f);
-        player.transform.position = curInteractable.hidePosition;
-        player.transform.rotation = curInteractable.hideRotation;
+
+        player.transform.position = curInteractable.hideTransform.position;
     }
 
     //buttons
@@ -80,11 +80,11 @@ public class InGameUI : SingletonMonobehaviour<InGameUI>
         {
             ToggleButtonPressed(true, i);
 
-            if (Settings.lockPassword[curGuess] == i)
+            if (Settings.lockPassword[index][curGuess] == i)
             {
                 curGuess++;
 
-                if (curGuess == Settings.lockPassword.Length)
+                if (curGuess == Settings.lockPassword[index].Length)
                 {
                     curInteractable.OpenUIInteraction();
                     ToggleUIInteraction(false);

@@ -12,5 +12,9 @@ public static class Settings
     public static string[] interactionNames = { "Open", "Pick up", "Open", "Open", "Hide" };
 
     //uiInteraction
-    public static int[] lockPassword = { 2, 4, 1, 8 };
+    public static int[][] lockPassword = new int[][]
+    {
+        new int[] { 2, 4, 1, 8 },
+        new int[] { 2, 4, 1, 8 }
+    };
 }

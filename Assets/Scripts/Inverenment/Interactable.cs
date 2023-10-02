@@ -18,8 +18,7 @@ public class Interactable : MonoBehaviour
     bool opened = false;
 
     [Header("type = 4")]
-    public Vector3 hidePosition;
-    public Quaternion hideRotation;
+    public Transform hideTransform;
     public Transform enemyTarget;
 
 

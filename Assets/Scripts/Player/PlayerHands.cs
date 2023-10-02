@@ -60,7 +60,7 @@ public class PlayerHands : SingletonMonobehaviour<PlayerHands>
     }
     public bool UseItem(int index)
     {
-        if (index == indexOfHandObject + 100)
+        if (index != -1 && index == indexOfHandObject + 100)
         {
             ToggleHandObject(false);
             UnSetItem();
