@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyVision : MonoBehaviour
 {
-    [SerializeField] Transform playerTransform;
+    Transform playerTransform;
     [SerializeField] Enemy enemy; 
     [SerializeField] int playerLayer;
     [SerializeField] int obstacleLayer;
@@ -13,6 +13,11 @@ public class EnemyVision : MonoBehaviour
     public float raycastDistance;
 
     [HideInInspector] public bool seesPlayer;
+
+    void Awake()
+    {
+        playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+    }
 
     void OnTriggerStay(Collider collision)
     {

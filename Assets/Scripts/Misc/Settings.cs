@@ -14,8 +14,7 @@ public static class Settings
     //uiInteraction
     public static int[][] lockPassword = new int[][]
     {
-        new int[] { 2, 4, 1, 8 },
-        new int[] { 2, 4, 1, 8 }
+        new int[] { 2, 1, 4, 6 },
     };
 
 

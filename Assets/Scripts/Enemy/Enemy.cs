@@ -16,11 +16,11 @@ public class Enemy : SingletonMonobehaviour<Enemy> //only one enemy
     [Header("SerializeFields")]
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator animator;
-    [SerializeField] Player player;
-    [SerializeField] Transform playerTransform;
+    Player player;
+    Transform playerTransform;
     public EnemyVision enemyVision;
 
-    [SerializeField] List<Transform> patrolPoints;
+    public List<Transform> patrolPoints;
 
     //coroutines
     Coroutine walkCor;
@@ -46,6 +46,8 @@ public class Enemy : SingletonMonobehaviour<Enemy> //only one enemy
     {
         base.Awake();
 
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        playerTransform = player.gameObject.transform;
     }
 
     void Start()

@@ -13,6 +13,8 @@ public class Interactable : MonoBehaviour
 
     [SerializeField] Animator animator;
 
+    public Transform[] newAreasForEnemy;
+
     [Header("type == 1")]
     public int indexOfHandObj;
 
@@ -61,6 +63,7 @@ public class Interactable : MonoBehaviour
 
     void OpenInteraction()
     {
+        AddAreas();
         animator.Play("Interaction");
         DestroyObject();
     }
@@ -91,13 +94,8 @@ public class Interactable : MonoBehaviour
                     DestroyObject();
                 }
             }
-            
+            AddAreas();
         }
-    }
-
-    public void DO(int i)
-    {
-        //asd
     }
 
     void OpenWithUIInteraction()
@@ -108,6 +106,14 @@ public class Interactable : MonoBehaviour
     void HideInteraction()
     {
         InGameUI.I.OpenHideInteraction(this);
+    }
+
+    void AddAreas()
+    {
+        foreach (var newAreaForEnemy in newAreasForEnemy)
+        {
+            Enemy.I.patrolPoints.Add(newAreaForEnemy);
+        }
     }
 
     //outside method for UI
