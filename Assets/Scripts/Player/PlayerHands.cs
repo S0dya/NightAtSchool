@@ -8,6 +8,7 @@ public class PlayerHands : SingletonMonobehaviour<PlayerHands>
 {
     [Header("SerializeFields")]
     [SerializeField] CanvasGroup dropButtonCG;
+    [SerializeField] TextMeshProUGUI nameOfObjText;
 
     [SerializeField] GameObject[] handsObjects;
     [SerializeField] GameObject[] sceneObjects;
@@ -16,8 +17,10 @@ public class PlayerHands : SingletonMonobehaviour<PlayerHands>
 
     [SerializeField] Transform objectParent; 
 
-    [HideInInspector] public int indexOfHandObject = -1;
-    [HideInInspector] public int curTypeOfUsage = -1;//1pickable, 2intrectableWithPickable
+    [HideInInspector] public int index = -1;
+    [HideInInspector] public int typeOfUsage = -1;//1pickable, 2intrectableWithPickable
+    [HideInInspector] public string nameOfObj;
+    [HideInInspector] public int indexOfHandObj;
 
     [Header("after interaction")]
     [SerializeField] CanvasGroup afterInteractionCG;
@@ -34,33 +37,48 @@ public class PlayerHands : SingletonMonobehaviour<PlayerHands>
         UnSetItem();
     }
 
-    public void SetItem(int index, int type)
+    public void SetItem(Interactable interactable)
     {
-        if (indexOfHandObject != -1) DropItem();
+        if (index != -1) DropItem();
 
-        indexOfHandObject = index;
-        curTypeOfUsage = type;
+        index = interactable.index;
+        typeOfUsage = interactable.type;
+        nameOfObj = interactable.nameOfObj;
+        indexOfHandObj = interactable.indexOfHandObj;
+
+        nameOfObjText.text = nameOfObj;
         GameManager.I.Open(dropButtonCG, 0.4f);
 
         ToggleHandObject(true);
     }
     public void UnSetItem()
     {
-        indexOfHandObject = -1;
-        curTypeOfUsage = -1;
+        index = -1;
+        typeOfUsage = -1;
+        nameOfObj = null;
+        indexOfHandObj = -1;
+        nameOfObjText.text = null;
+
         GameManager.I.Close(dropButtonCG, 0.01f);
     }
 
     public void DropItem()
     {
         ToggleHandObject(false);
-        GameObject sceneObj = Instantiate(sceneObjects[indexOfHandObject], initialPosition.position, Quaternion.identity, objectParent);
+        GameObject sceneObj = Instantiate(sceneObjects[indexOfHandObj], initialPosition.position, Quaternion.identity, objectParent);
+
+        Interactable interactable = sceneObj.GetComponent<Interactable>();
+        interactable.index = index;
+        interactable.type = typeOfUsage;
+        interactable.nameOfObj = nameOfObj;
+        interactable.indexOfHandObj = indexOfHandObj;
+
         Rigidbody sceneObjRB = sceneObj.GetComponent<Rigidbody>();
         sceneObjRB.AddForce(transform.forward.normalized * 4, ForceMode.Impulse);
     }
-    public bool UseItem(int index)
+    public bool UseItem(int i)
     {
-        if (index != -1 && index == indexOfHandObject + 100)
+        if (index != -1 && i == index + 100)
         {
             ToggleHandObject(false);
             UnSetItem();
@@ -76,6 +94,6 @@ public class PlayerHands : SingletonMonobehaviour<PlayerHands>
 
     public void ToggleHandObject(bool val)
     {
-        handsObjects[indexOfHandObject].SetActive(val);
+        handsObjects[index].SetActive(val);
     }
 }

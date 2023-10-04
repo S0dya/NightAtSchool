@@ -17,7 +17,6 @@ public class GameMenuUI : SingletonMonobehaviour<GameMenuUI>
     [SerializeField] Image backgroundImage;
 
     [Header("Settings")]
-
     [SerializeField] Slider[] soundSliders;
 
 
@@ -45,7 +44,6 @@ public class GameMenuUI : SingletonMonobehaviour<GameMenuUI>
     public void ExitSettingsButton()
     {
         ToggleCG(settingsCG, false);
-
     }
 
     public void NewGameButton()

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2335537926648014263}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TeacherTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 2335537927371868321}
   - component: {fileID: 2335537927371868320}
   - component: {fileID: 2335537927371868327}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Table
   m_TagString: Untagged
   m_Icon: {fileID: 0}

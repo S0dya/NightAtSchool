@@ -7,21 +7,27 @@ using UnityEngine.Events;
 public class Interactable : MonoBehaviour
 {
     public int index;
-    public int type;//door open, pick, locked door object needed, ui interaction, hide
-
+    public int type;//door open, pick, object needed, ui interaction, hide 
     public string nameOfObj;
     public string actionSound;
 
     [SerializeField] Animator animator;
 
+    [Header("type == 1")]
+    public int indexOfHandObj;
+
+    [Header("type == 2")]
+    public int neededInteraction;
+    [SerializeField] GameObject[] objectsToAppear;
+    int curInteraction;
+    
     //type == 3
     bool opened = false;
-
-    [Header("type = 4")]
+    
+    [Header("type == 4")]
     public Transform hideTransform;
     public Transform enemyTarget;
-
-
+    
     System.Action interaction;
 
     void Awake()
@@ -61,7 +67,7 @@ public class Interactable : MonoBehaviour
 
     void PickInteraction()
     {
-        PlayerHands.I.SetItem(index, type);
+        PlayerHands.I.SetItem(this);
         DestroyObject();
     }
 
@@ -69,9 +75,29 @@ public class Interactable : MonoBehaviour
     {
         if (PlayerHands.I.UseItem(index))
         {
-            animator.Play("Interaction");
-            DestroyObject();
+            if (neededInteraction == 0)
+            {
+                animator.Play("Interaction");
+                DestroyObject();
+            }
+            else
+            {
+                //animator.Play($"Interaction{curInteraction}");
+                objectsToAppear[curInteraction].SetActive(true);
+                curInteraction++;
+                if (curInteraction == neededInteraction)
+                {
+                    animator.Play($"Interaction");
+                    DestroyObject();
+                }
+            }
+            
         }
+    }
+
+    public void DO(int i)
+    {
+        //asd
     }
 
     void OpenWithUIInteraction()

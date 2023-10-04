@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2022996211510430818}
   - component: {fileID: 2022996211510430816}
   - component: {fileID: 2022996211510430819}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2022996212116835345}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BlackBoard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 2022996212591132814}
   - component: {fileID: 2022996212591132812}
   - component: {fileID: 2022996212591132815}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4018033760266409038}
   - component: {fileID: 7409465634710889575}
   - component: {fileID: 9000762975572266827}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: StudentChair (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 7077716952574609629}
   - component: {fileID: 7077716952574609628}
   - component: {fileID: 7077716952574609627}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7077716952652216008}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: StudentTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 7077716953592896372}
   - component: {fileID: 7077716953592896371}
   - component: {fileID: 7077716953592896370}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: StudentChair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -333,7 +333,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7077716953900669678}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: StudentPlace
   m_TagString: Untagged
   m_Icon: {fileID: 0}

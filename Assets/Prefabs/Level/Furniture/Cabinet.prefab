@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 319040188317154019}
   - component: {fileID: 2433471630264366117}
   - component: {fileID: 319040188317154044}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: cabinet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7106789581610830054}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cabinet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
