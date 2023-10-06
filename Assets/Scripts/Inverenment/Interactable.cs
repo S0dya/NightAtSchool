@@ -7,9 +7,10 @@ using UnityEngine.Events;
 public class Interactable : MonoBehaviour
 {
     public int index;
-    public int type;//door open, pick, object needed, ui interaction, hide 
+    public int type;//door open, pick, object needed, ui interaction, hide
     public string nameOfObj;
     public string actionSound;
+    public int cutsceneIndex;
 
     [SerializeField] Animator animator;
 
@@ -59,6 +60,10 @@ public class Interactable : MonoBehaviour
     public void Interact()
     {
         interaction.Invoke();
+        if (cutsceneIndex != -1)
+        {
+            TimelineManager.I.PlayCutscene(cutsceneIndex);
+        }
     }
 
     void OpenInteraction()

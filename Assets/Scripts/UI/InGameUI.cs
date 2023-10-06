@@ -8,6 +8,8 @@ public class InGameUI : SingletonMonobehaviour<InGameUI>
     [SerializeField] Player player;
 
     [Header("UI interaction")]
+    [SerializeField] CanvasGroup inGameUICG;
+    [SerializeField] CanvasGroup inputUICG;
     [SerializeField] CanvasGroup interactionUIWindowCG;
     [SerializeField] GameObject[] UIInteractions;
     [HideInInspector] public int index;
@@ -21,7 +23,6 @@ public class InGameUI : SingletonMonobehaviour<InGameUI>
     bool[] buttonsPressed = new bool[9];
 
     [Header("Hide")]
-    [SerializeField] CanvasGroup inputUICG;
     [SerializeField] CanvasGroup HideInteractionCG;
     Vector3 lastPlayerPosition;
 
@@ -124,6 +125,16 @@ public class InGameUI : SingletonMonobehaviour<InGameUI>
         Enemy.I.sawPlayerBeforeHiding = true;
     }
 
-    //UIInteractionMethods
 
+
+    public void ToggleInputTrue()
+    {
+        GameManager.I.Open(inGameUICG, 0.4f);
+        GameManager.I.Open(inputUICG, 0.4f);
+    }
+    public void ToggleInputFalse()
+    {
+        GameManager.I.Close(inGameUICG, 0f);
+        GameManager.I.Close(inputUICG, 0f);
+    }
 }

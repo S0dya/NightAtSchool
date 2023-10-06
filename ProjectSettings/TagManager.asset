@@ -8,6 +8,7 @@ TagManager:
   - Pickable
   - Interactable
   - HideInteractable
+  - EnemyParent
   layers:
   - Default
   - TransparentFX
