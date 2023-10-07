@@ -793,7 +793,12 @@ MonoBehaviour:
   type: 4
   nameOfObj: 
   actionSound: 
+  cutsceneIndex: -1
   animator: {fileID: 0}
+  newAreasForEnemy: []
+  indexOfHandObj: 0
+  neededInteraction: 0
+  objectsToAppear: []
   hideTransform: {fileID: 1525480887}
   enemyTarget: {fileID: 708588075633796105}
 --- !u!65 &6267759015299032932

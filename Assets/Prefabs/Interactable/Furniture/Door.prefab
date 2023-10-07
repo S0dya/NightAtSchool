@@ -470,9 +470,13 @@ MonoBehaviour:
   type: 0
   nameOfObj: 
   actionSound: 
+  cutsceneIndex: -1
   animator: {fileID: 2618027099772460017}
-  hidePosition: {x: 0, y: 0, z: 0}
-  hideRotation: {x: 0, y: 0, z: 0, w: 0}
+  newAreasForEnemy: []
+  indexOfHandObj: 0
+  neededInteraction: 0
+  objectsToAppear: []
+  hideTransform: {fileID: 0}
   enemyTarget: {fileID: 0}
 --- !u!33 &2618027099973549488
 MeshFilter:

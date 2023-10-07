@@ -29,8 +29,8 @@ public class Enemy : SingletonMonobehaviour<Enemy> //only one enemy
 
     //public
     [HideInInspector] public bool isFollowingPlayer;
-    [HideInInspector] public bool heardSound;
     [HideInInspector] public bool sawPlayerBeforeHiding;
+    [HideInInspector] public bool heardSound;
 
     //local
     Transform target;
@@ -48,11 +48,6 @@ public class Enemy : SingletonMonobehaviour<Enemy> //only one enemy
 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         playerTransform = player.gameObject.transform;
-    }
-
-    void Start()
-    {
-        ChooseNextTarget(null);
     }
 
     void Update()
@@ -170,7 +165,13 @@ public class Enemy : SingletonMonobehaviour<Enemy> //only one enemy
         if (collision.CompareTag("Player") && isFollowingPlayer && enemyVision.seesPlayer)
         {
             ScreamerUI.I.PlayScreamer();
-            Destroy(gameObject);
         }
+    }
+
+    //animation
+    public void StartMoving()
+    {
+        target = patrolPoints[0];
+        StartWalking();
     }
 }

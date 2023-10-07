@@ -60,10 +60,7 @@ public class Interactable : MonoBehaviour
     public void Interact()
     {
         interaction.Invoke();
-        if (cutsceneIndex != -1)
-        {
-            TimelineManager.I.PlayCutscene(cutsceneIndex);
-        }
+        if (cutsceneIndex > 0) TimelineManager.I.PlayCutscene(cutsceneIndex - 1);
     }
 
     void OpenInteraction()

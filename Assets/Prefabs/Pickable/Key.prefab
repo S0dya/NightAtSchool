@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6776699395313366148}
   - component: {fileID: 6776699395313366145}
+  - component: {fileID: -4028132110953235567}
   - component: {fileID: 6776699395313366144}
   - component: {fileID: 6776699395313366151}
   - component: {fileID: 6776699395313366150}
@@ -50,9 +51,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 0
   type: 1
-  name: Key
+  nameOfObj: 
   actionSound: 
+  cutsceneIndex: 0
   animator: {fileID: 0}
+  newAreasForEnemy: []
+  indexOfHandObj: 0
+  neededInteraction: 0
+  objectsToAppear: []
+  hideTransform: {fileID: 0}
+  enemyTarget: {fileID: 0}
+--- !u!114 &-4028132110953235567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6776699395313366155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7deb42d71d147e0408f81f84aa9a0bca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hearDistance: 6
+  enemy: {fileID: 0}
 --- !u!33 &6776699395313366144
 MeshFilter:
   m_ObjectHideFlags: 0

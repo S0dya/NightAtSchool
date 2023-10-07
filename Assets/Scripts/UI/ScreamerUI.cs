@@ -16,6 +16,7 @@ public class ScreamerUI : SingletonMonobehaviour<ScreamerUI>
 
     public void PlayScreamer()
     {
+        Destroy(Enemy.I.gameObject);
         GameManager.I.Open(CG, 0);
         videoPlayer.loopPointReached += OnVideoStopped;
         videoPlayer.Play();

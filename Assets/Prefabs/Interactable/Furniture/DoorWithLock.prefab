@@ -522,6 +522,11 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 8381495530366470604}
+    - target: {fileID: 2598218297575861301, guid: 5eaea736aff964843ac686372250a4d3,
+        type: 3}
+      propertyPath: cutsceneIndex
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 2598218297576828664, guid: 5eaea736aff964843ac686372250a4d3,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

@@ -147,7 +147,12 @@ MonoBehaviour:
   type: 4
   nameOfObj: Desk
   actionSound: 
+  cutsceneIndex: -1
   animator: {fileID: 0}
+  newAreasForEnemy: []
+  indexOfHandObj: 0
+  neededInteraction: 0
+  objectsToAppear: []
   hideTransform: {fileID: 1248189928}
   enemyTarget: {fileID: 292442345572731598}
 --- !u!65 &292442346690015372

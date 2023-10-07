@@ -50,10 +50,11 @@ MonoBehaviour:
   type: 2
   nameOfObj: battery holder
   actionSound: 
+  cutsceneIndex: -1
   animator: {fileID: 7720729657601065104}
+  newAreasForEnemy: []
   indexOfHandObj: 1
   neededInteraction: 1
-  lastInteractionAnimator: {fileID: 0}
   objectsToAppear: []
   hideTransform: {fileID: 0}
   enemyTarget: {fileID: 0}

@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class GameManager : SingletonMonobehaviour<GameManager>
 {
-    [SerializeField] GameObject enemyPrefab;
-    [SerializeField] Vector3 enemySpawnPos;
-
     protected override void Awake()
     {
         base.Awake();
@@ -14,20 +11,6 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         LoadData();
         //Settings.firstTime = false;
 
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            InstantateEnemy();
-        }
-    }
-
-    public void InstantateEnemy()
-    {
-        Transform enemyParent = GameObject.FindGameObjectWithTag("EnemyParent").GetComponent<Transform>();
-        Instantiate(enemyPrefab, enemySpawnPos, Quaternion.identity, enemyParent);
     }
 
     //UI

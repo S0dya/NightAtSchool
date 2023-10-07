@@ -8,6 +8,7 @@ public class Player : SingletonMonobehaviour<Player>
     public float movementSpeed;
     public float rotationSpeed;
     public float gravityForce;
+    public float soundMultiplayer;
 
     [Header("SerializeFields")]
     [SerializeField] CharacterController controller;
@@ -16,6 +17,7 @@ public class Player : SingletonMonobehaviour<Player>
     [SerializeField] FloatingJoystick POVJoystick;
     [SerializeField] Animator animator;
     [SerializeField] BoxCollider raycastCollider;
+    [SerializeField] Enemy enemy;
 
 
     //local
@@ -105,8 +107,20 @@ public class Player : SingletonMonobehaviour<Player>
         if (controller.isGrounded)
         {
             //PlaySound;
+            if (Vector3.Distance(transform.position, enemy.transform.position) < characterVelocity.magnitude * soundMultiplayer
+            && !enemy.isFollowingPlayer && !enemy.sawPlayerBeforeHiding)
+            {
+                enemy.ChooseNextTarget(transform);
+            }
         }
     }
+    //animation
+    public void SetZeroPos()
+    {
+        transform.rotation = Quaternion.Euler(0, 90, 0);
+        playerCamera.transform.localEulerAngles = new Vector3(0, 0, 0);
+    }
+
 
     //hide interaction
     public void ToggleHide(bool val)
@@ -125,6 +139,4 @@ public class Player : SingletonMonobehaviour<Player>
     {
         GameMenuUI.I.GameOver();
     }
-
-
 }
