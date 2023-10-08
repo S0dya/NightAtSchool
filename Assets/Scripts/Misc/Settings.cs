@@ -5,8 +5,8 @@ using UnityEngine;
 public static class Settings
 {
     //game save logic
-    public static bool firstTime;
-    public static float[] soundVolume = new float[3];
+    public static bool firstTime = true;
+    public static float[] soundVolume = new float[3] { 1, 1, 1 };
 
     //UI
     public static string[] interactionNames = { "Open", "Pick up", "Open", "Open", "Hide" };
@@ -19,8 +19,6 @@ public static class Settings
 
 
     /*info
-
-
     100 - main exit lock
     101 - security room lock
     102 - music class lock
@@ -29,6 +27,5 @@ public static class Settings
     105 - literature class lock
     106 - art class lock
     107 - teachers locker room lock
-
     */
 }

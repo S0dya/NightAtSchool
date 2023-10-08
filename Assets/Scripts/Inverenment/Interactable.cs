@@ -65,14 +65,14 @@ public class Interactable : MonoBehaviour
 
     void OpenInteraction()
     {
-        AddAreas();
         animator.Play("Interaction");
-        DestroyObject();
+        AddAreas();
     }
 
     void PickInteraction()
     {
         PlayerHands.I.SetItem(this);
+        PlaySoundPick();
         DestroyObject();
     }
 
@@ -82,21 +82,18 @@ public class Interactable : MonoBehaviour
         {
             if (neededInteraction == 0)
             {
-                animator.Play("Interaction");
-                DestroyObject();
+                AddAreas();
             }
             else
             {
-                //animator.Play($"Interaction{curInteraction}");
                 objectsToAppear[curInteraction].SetActive(true);
                 curInteraction++;
                 if (curInteraction == neededInteraction)
                 {
-                    animator.Play($"Interaction");
-                    DestroyObject();
+                    animator.Play("Interaction");
+                    AddAreas();
                 }
             }
-            AddAreas();
         }
     }
 
@@ -110,12 +107,11 @@ public class Interactable : MonoBehaviour
         InGameUI.I.OpenHideInteraction(this);
     }
 
-    void AddAreas()
+    public void AddAreas()
     {
-        foreach (var newAreaForEnemy in newAreasForEnemy)
-        {
-            Enemy.I.patrolPoints.Add(newAreaForEnemy);
-        }
+        PlaySoundDoor();
+        foreach (var newAreaForEnemy in newAreasForEnemy) Enemy.I.patrolPoints.Add(newAreaForEnemy);
+        DestroyObject();
     }
 
     //outside method for UI
@@ -125,8 +121,18 @@ public class Interactable : MonoBehaviour
         {
             opened = true;
             animator.Play("Interaction");
+            AddAreas();
         }
     }
 
     void DestroyObject() => Destroy(gameObject);
+
+    void PlaySoundDoor()
+    {
+        AudioManager.I.PlayOneShot(AudioManager.I.DoorOpen, transform.position);
+    }
+    void PlaySoundPick()
+    {
+        AudioManager.I.PlayOneShot(AudioManager.I.ItemPick, transform.position);
+    }
 }

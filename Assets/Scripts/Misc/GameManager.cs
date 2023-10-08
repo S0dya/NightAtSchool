@@ -9,8 +9,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         base.Awake();
 
         LoadData();
-        //Settings.firstTime = false;
-
+        Settings.firstTime = false;
     }
 
     //UI
@@ -70,14 +69,23 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     public void SaveData()
     {
-        //int/float
-        //bool
-        //PlayerPrefs.SetInt("firstTime", Settings.firstTime ? 0 : 1);
+        for (int i = 0; i < Settings.soundVolume.Length; i++)
+        {
+            PlayerPrefs.SetFloat($"Volume {i}", Settings.soundVolume[i]);
+        }
+
+        PlayerPrefs.SetInt("firstTime", Settings.firstTime ? 0 : 1);
     }
 
     public void LoadData() 
     {
-        //Settings.firstTime = (PlayerPrefs.GetInt("firstTime") == 0);
+        Settings.firstTime = (PlayerPrefs.GetInt("firstTime") == 0);
+        if (Settings.firstTime) return;
+
+        for (int i = 0; i < Settings.soundVolume.Length; i++)
+        {
+            Settings.soundVolume[i] = PlayerPrefs.GetFloat($"Volume {i}");
+        }
     }
 
 }

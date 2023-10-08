@@ -131,15 +131,6 @@ public class Enemy : SingletonMonobehaviour<Enemy> //only one enemy
         StartWalking();
     }
 
-    //soundsTrigger
-    public void OnHearSound(Transform transform)
-    {
-        if (!isFollowingPlayer)
-        {
-            ChooseNextTarget(transform);
-        }
-    }
-
     //enemy - player
     public void ToggleFollowingPlayer(bool val)
     {
@@ -164,6 +155,8 @@ public class Enemy : SingletonMonobehaviour<Enemy> //only one enemy
     {
         if (collision.CompareTag("Player") && isFollowingPlayer && enemyVision.seesPlayer)
         {
+            AudioManager.I.EventInstancesDict["Jumpscare"].start();
+            player.StopMoving();
             ScreamerUI.I.PlayScreamer();
         }
     }
@@ -173,5 +166,10 @@ public class Enemy : SingletonMonobehaviour<Enemy> //only one enemy
     {
         target = patrolPoints[0];
         StartWalking();
+    }
+
+    public void PlayStepSound()
+    {
+        AudioManager.I.PlayOneShot(AudioManager.I.EnemySteps, transform.position);
     }
 }

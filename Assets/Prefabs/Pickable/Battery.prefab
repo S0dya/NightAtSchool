@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hearDistance: 5
-  enemy: {fileID: 0}
+  type: 1
 --- !u!33 &5846972931882946058
 MeshFilter:
   m_ObjectHideFlags: 0

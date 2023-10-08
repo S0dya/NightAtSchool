@@ -7,7 +7,6 @@ using TMPro;
 public class GameMenuUI : SingletonMonobehaviour<GameMenuUI>
 {
     [SerializeField] CanvasGroup gameMenuCG;
-    [SerializeField] CanvasGroup settingsCG;
 
     [SerializeField] GameObject resumeButtonObj;
     [SerializeField] GameObject replayButtonObj;
@@ -16,45 +15,26 @@ public class GameMenuUI : SingletonMonobehaviour<GameMenuUI>
 
     [SerializeField] Image backgroundImage;
 
-    [Header("Settings")]
-    [SerializeField] Slider[] soundSliders;
-
-
     protected override void Awake()
     {
         base.Awake();
 
     }
 
-
     //buttons
     public void ResumeButton()
     {
         CloseMenu();
-    }
-    public void SettingsButton()
-    {
-        ToggleCG(settingsCG, true);
     }
     public void ExitMenuButton()
     {
         //open Menu
     }
 
-    public void ExitSettingsButton()
-    {
-        ToggleCG(settingsCG, false);
-    }
-
     public void NewGameButton()
     {
         //new game
 
-    }
-
-    public void ChangeVolumeButton(int i)
-    {
-        AudioManager.I.ChangeVolume(i, soundSliders[i].value);
     }
 
     //public methods
@@ -67,6 +47,7 @@ public class GameMenuUI : SingletonMonobehaviour<GameMenuUI>
     }
     public void GameOver()
     {
+        AudioManager.I.EventInstancesDict["Ambience"].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         backgroundImage.enabled = true;
         headText.text = "GAMEOVER";
         replayButtonObj.SetActive(true);

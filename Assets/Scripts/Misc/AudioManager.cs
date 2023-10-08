@@ -16,9 +16,21 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
     Coroutine fadeOutCoroutine;
     Coroutine randomSFXCor;
 
+    [field: SerializeField] public EventReference Ambience { get; private set; }
     [field: SerializeField] public EventReference Music { get; private set; }
+
+    [field: SerializeField] public EventReference PlayerSteps { get; private set; }
+    [field: SerializeField] public EventReference EnemySteps { get; private set; }
+
+    [field: SerializeField] public EventReference ItemPick { get; private set; }
+    [field: SerializeField] public EventReference KeyDrop { get; private set; }
+    [field: SerializeField] public EventReference BatteryDrop { get; private set; }
+
+    [field: SerializeField] public EventReference DoorOpen { get; private set; }
+
+    [field: SerializeField] public EventReference Jumpscare { get; private set; }
+
     [field: SerializeField] public EventReference ButtonPress { get; private set; }
-    [field: SerializeField] public EventReference ButtonPressDownBar { get; private set; }
 
     protected override void Awake()
     {
@@ -31,12 +43,28 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
 
     void Start()
     {
-        /*
+        EventInstancesDict.Add("Ambience", CreateInstance(Ambience));
         EventInstancesDict.Add("Music", CreateInstance(Music));
 
+        EventInstancesDict.Add("PlayerSteps", CreateInstance(PlayerSteps));
+        EventInstancesDict.Add("EnemySteps", CreateInstance(EnemySteps));
+        
+        EventInstancesDict.Add("ItemPick", CreateInstance(ItemPick));
+        EventInstancesDict.Add("KeyDrop", CreateInstance(KeyDrop));
+        EventInstancesDict.Add("BatteryDrop", CreateInstance(BatteryDrop));
+
+        EventInstancesDict.Add("DoorOpen", CreateInstance(DoorOpen));
+
+        EventInstancesDict.Add("Jumpscare", CreateInstance(Jumpscare));
+
         EventInstancesDict.Add("ButtonPress", CreateInstance(ButtonPress));
-        EventInstancesDict.Add("ButtonPressDownBar", CreateInstance(ButtonPressDownBar));
-        */
+
+        EventInstancesDict["Music"].start();
+
+        for (int i = 0; i < Settings.soundVolume.Length; i++)
+        {
+            ChangeVolume(i, Settings.soundVolume[i]);
+        }
     }
 
     public void SetParameter(string instanceName, string parameterName, float value)
@@ -58,6 +86,10 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
     public void PlayOneShot(string sound)
     {
         EventInstancesDict[sound].start();
+    }
+    public void PlayOneShot(EventReference sound, Vector3 pos)
+    {
+        RuntimeManager.PlayOneShot(sound, pos);
     }
 
     public EventInstance CreateInstance(EventReference sound)
@@ -85,6 +117,11 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
 
         string bus = (i == 0 ? "bus:/SFX" : i == 1 ? "bus:/Music" : "bus:/Ambience");
         RuntimeManager.GetBus(bus).setVolume(volume);
+    }
+
+    public void ToggleSound(bool val)
+    {
+        RuntimeManager.GetBus("bus:/").setVolume(val ? 1 : 0);
     }
 
     

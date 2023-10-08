@@ -51,7 +51,7 @@ public class Player : SingletonMonobehaviour<Player>
     public void StopMoving()
     {
         animator.Play("IDLE");
-        StopCoroutine(movementCor);
+        if (movementCor != null) StopCoroutine(movementCor);
         characterVelocity = Vector3.zero;
     }
 
@@ -104,14 +104,13 @@ public class Player : SingletonMonobehaviour<Player>
     //sound
     public void PlayStepSound()
     {
-        if (controller.isGrounded)
+        AudioManager.I.PlayOneShot("PlayerSteps");
+
+
+        if (Vector3.Distance(transform.position, enemy.transform.position) < characterVelocity.magnitude * soundMultiplayer
+        && !enemy.isFollowingPlayer && !enemy.sawPlayerBeforeHiding)
         {
-            //PlaySound;
-            if (Vector3.Distance(transform.position, enemy.transform.position) < characterVelocity.magnitude * soundMultiplayer
-            && !enemy.isFollowingPlayer && !enemy.sawPlayerBeforeHiding)
-            {
-                enemy.ChooseNextTarget(transform);
-            }
+            enemy.ChooseNextTarget(transform);
         }
     }
     //animation

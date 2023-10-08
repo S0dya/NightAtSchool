@@ -34,6 +34,7 @@ public class InGameUI : SingletonMonobehaviour<InGameUI>
 
     public void UIInteraction(Interactable interactable)
     {
+        player.StopMoving();
         curInteractable = interactable;
 
         index = curInteractable.index - 50;
@@ -43,6 +44,7 @@ public class InGameUI : SingletonMonobehaviour<InGameUI>
     
     public void OpenHideInteraction(Interactable interactable)
     {
+        player.StopMoving();
         curInteractable = interactable;
         lastPlayerPosition = player.transform.position;
 
@@ -134,6 +136,7 @@ public class InGameUI : SingletonMonobehaviour<InGameUI>
     }
     public void ToggleInputFalse()
     {
+        player.StopMoving();
         GameManager.I.Close(inGameUICG, 0f);
         GameManager.I.Close(inputUICG, 0f);
     }
