@@ -17,7 +17,7 @@ public class LoadingSceneManager : SingletonMonobehaviour<LoadingSceneManager>
     }
     void Start()
     {
-        //StartCoroutine(LoadSceneCor(-1, 1));
+        StartCoroutine(LoadSceneCor(-1, 1));
     }
 
     public void LoadMenu()

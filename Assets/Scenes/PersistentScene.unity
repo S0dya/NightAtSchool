@@ -619,6 +619,27 @@ MonoBehaviour:
       Data3: -484384620
       Data4: -718011856
     Path: event:/SFX/Enemy/EnemySteps
+  <EnemyBreath>k__BackingField:
+    Guid:
+      Data1: -1602338081
+      Data2: 1259363714
+      Data3: 1688078518
+      Data4: -1481559884
+    Path: event:/SFX/Enemy/EnemyBreath
+  <EnemySawPlayer>k__BackingField:
+    Guid:
+      Data1: -1849728811
+      Data2: 1150526331
+      Data3: 236456862
+      Data4: 820235789
+    Path: event:/SFX/Enemy/EnemySawPlayer
+  <EnemyLostPlayer>k__BackingField:
+    Guid:
+      Data1: 1031217372
+      Data2: 1197847003
+      Data3: -2052199530
+      Data4: 743099077
+    Path: event:/SFX/Enemy/EnemyLostPlayer
   <ItemPick>k__BackingField:
     Guid:
       Data1: 2075253048

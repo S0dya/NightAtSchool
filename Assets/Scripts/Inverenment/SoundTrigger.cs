@@ -6,6 +6,8 @@ public class SoundTrigger : MonoBehaviour
 {
     [SerializeField] float hearDistance;
     [SerializeField] int type;
+    public CapsuleCollider capsuleC;
+    public BoxCollider boxC;
     Enemy enemy;
     Interactable interactable;
 
@@ -14,7 +16,8 @@ public class SoundTrigger : MonoBehaviour
         enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
     }
 
-    void OnCollisionEnter(Collision collision)
+
+    void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.layer == 9 || collision.gameObject.CompareTag("Interactable"))
         {
@@ -34,6 +37,13 @@ public class SoundTrigger : MonoBehaviour
             {
                 enemy.ChooseNextTarget(transform);
             }
+
+            ToggleCollider(false);
         }
+    }
+    public void ToggleCollider(bool val)
+    {
+        if (capsuleC != null) capsuleC.enabled = val;
+        else if (boxC != null) boxC.enabled = val;
     }
 }

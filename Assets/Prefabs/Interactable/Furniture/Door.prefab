@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2618027098972500895}
   - component: {fileID: 2618027098972500889}
   - component: {fileID: 2618027098972500894}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 2618027099457388486}
   - component: {fileID: 2618027099457388487}
   - component: {fileID: 2618027099457388484}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 2618027099704938445}
   - component: {fileID: 2618027099704938446}
   - component: {fileID: 2618027099704938447}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 2618027099772460016}
   - component: {fileID: 2618027099772460017}
   - component: {fileID: 2618027099772460018}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -346,7 +346,7 @@ GameObject:
   - component: {fileID: 2618027099865021743}
   - component: {fileID: 2618027099865021736}
   - component: {fileID: 2618027099865021737}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -428,11 +428,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2618027099973549495}
   - component: {fileID: 2618027099973549491}
-  - component: {fileID: 2618027099973549488}
-  - component: {fileID: 2618027099973549489}
   - component: {fileID: 2618027099973549494}
   - component: {fileID: 2618027099973549490}
-  m_Layer: 13
+  m_Layer: 16
   m_Name: Interactable
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -469,7 +467,6 @@ MonoBehaviour:
   index: 0
   type: 0
   nameOfObj: 
-  actionSound: 
   cutsceneIndex: -1
   animator: {fileID: 2618027099772460017}
   newAreasForEnemy: []
@@ -478,56 +475,6 @@ MonoBehaviour:
   objectsToAppear: []
   hideTransform: {fileID: 0}
   enemyTarget: {fileID: 0}
---- !u!33 &2618027099973549488
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2618027099973549492}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &2618027099973549489
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2618027099973549492}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &2618027099973549494
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -566,7 +513,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2618027100665189565}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}

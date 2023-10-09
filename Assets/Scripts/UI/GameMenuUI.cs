@@ -28,13 +28,17 @@ public class GameMenuUI : SingletonMonobehaviour<GameMenuUI>
     }
     public void ExitMenuButton()
     {
-        //open Menu
+        LoadingSceneManager.I.LoadMenu();
     }
 
     public void NewGameButton()
     {
-        //new game
+        LoadingSceneManager.I.RestartGame();
+    }
 
+    public void PlayButtonSound()
+    {
+        AudioManager.I.PlayButtonSound();
     }
 
     //public methods

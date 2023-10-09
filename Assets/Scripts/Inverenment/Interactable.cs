@@ -9,7 +9,6 @@ public class Interactable : MonoBehaviour
     public int index;
     public int type;//door open, pick, object needed, ui interaction, hide
     public string nameOfObj;
-    public string actionSound;
     public int cutsceneIndex;
 
     [SerializeField] Animator animator;
@@ -23,9 +22,6 @@ public class Interactable : MonoBehaviour
     public int neededInteraction;
     [SerializeField] GameObject[] objectsToAppear;
     int curInteraction;
-    
-    //type == 3
-    bool opened = false;
     
     [Header("type == 4")]
     public Transform hideTransform;
@@ -65,8 +61,7 @@ public class Interactable : MonoBehaviour
 
     void OpenInteraction()
     {
-        animator.Play("Interaction");
-        AddAreas();
+        Open();
     }
 
     void PickInteraction()
@@ -80,21 +75,20 @@ public class Interactable : MonoBehaviour
     {
         if (PlayerHands.I.UseItem(index))
         {
-            if (neededInteraction == 0)
-            {
-                AddAreas();
-            }
+            if (neededInteraction == 0) Open();
             else
             {
                 objectsToAppear[curInteraction].SetActive(true);
                 curInteraction++;
-                if (curInteraction == neededInteraction)
-                {
-                    animator.Play("Interaction");
-                    AddAreas();
-                }
+                if (curInteraction == neededInteraction) Open();
             }
         }
+    }
+
+    void Open()
+    {
+        animator.Play("Interaction");
+        AddAreas();
     }
 
     void OpenWithUIInteraction()
@@ -117,12 +111,7 @@ public class Interactable : MonoBehaviour
     //outside method for UI
     public void OpenUIInteraction()
     {
-        if (!opened)
-        {
-            opened = true;
-            animator.Play("Interaction");
-            AddAreas();
-        }
+        Open();
     }
 
     void DestroyObject() => Destroy(gameObject);

@@ -20,12 +20,15 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
     [field: SerializeField] public EventReference Music { get; private set; }
 
     [field: SerializeField] public EventReference PlayerSteps { get; private set; }
+
     [field: SerializeField] public EventReference EnemySteps { get; private set; }
+    [field: SerializeField] public EventReference EnemyBreath { get; private set; }
+    [field: SerializeField] public EventReference EnemySawPlayer { get; private set; }
+    [field: SerializeField] public EventReference EnemyLostPlayer { get; private set; }
 
     [field: SerializeField] public EventReference ItemPick { get; private set; }
     [field: SerializeField] public EventReference KeyDrop { get; private set; }
     [field: SerializeField] public EventReference BatteryDrop { get; private set; }
-
     [field: SerializeField] public EventReference DoorOpen { get; private set; }
 
     [field: SerializeField] public EventReference Jumpscare { get; private set; }
@@ -47,14 +50,9 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
         EventInstancesDict.Add("Music", CreateInstance(Music));
 
         EventInstancesDict.Add("PlayerSteps", CreateInstance(PlayerSteps));
-        EventInstancesDict.Add("EnemySteps", CreateInstance(EnemySteps));
-        
-        EventInstancesDict.Add("ItemPick", CreateInstance(ItemPick));
-        EventInstancesDict.Add("KeyDrop", CreateInstance(KeyDrop));
-        EventInstancesDict.Add("BatteryDrop", CreateInstance(BatteryDrop));
 
-        EventInstancesDict.Add("DoorOpen", CreateInstance(DoorOpen));
-
+        EventInstancesDict.Add("EnemySawPlayer", CreateInstance(EnemySawPlayer));
+        EventInstancesDict.Add("EnemyLostPlayer", CreateInstance(EnemyLostPlayer));
         EventInstancesDict.Add("Jumpscare", CreateInstance(Jumpscare));
 
         EventInstancesDict.Add("ButtonPress", CreateInstance(ButtonPress));
@@ -115,7 +113,7 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
     {
         Settings.soundVolume[i] = volume;
 
-        string bus = (i == 0 ? "bus:/SFX" : i == 1 ? "bus:/Music" : "bus:/Ambience");
+        string bus = (i == 0 ? "bus:/Music" : i == 1 ? "bus:/SFX" : "bus:/Ambience");
         RuntimeManager.GetBus(bus).setVolume(volume);
     }
 
@@ -124,5 +122,8 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
         RuntimeManager.GetBus("bus:/").setVolume(val ? 1 : 0);
     }
 
-    
+    public void PlayButtonSound()
+    {
+        EventInstancesDict["ButtonPress"].start();
+    }
 }

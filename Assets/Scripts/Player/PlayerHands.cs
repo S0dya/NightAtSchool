@@ -73,6 +73,9 @@ public class PlayerHands : SingletonMonobehaviour<PlayerHands>
         interactable.nameOfObj = nameOfObj;
         interactable.indexOfHandObj = indexOfHandObj;
 
+        SoundTrigger soundTrigger = sceneObj.GetComponentInChildren<SoundTrigger>();
+        soundTrigger.ToggleCollider(true);
+
         Rigidbody sceneObjRB = sceneObj.GetComponent<Rigidbody>();
         sceneObjRB.AddForce(transform.forward.normalized * 4, ForceMode.Impulse);
     }

@@ -49,7 +49,6 @@ MonoBehaviour:
   index: 104
   type: 2
   nameOfObj: battery holder
-  actionSound: 
   cutsceneIndex: -1
   animator: {fileID: 7720729657601065104}
   newAreasForEnemy: []

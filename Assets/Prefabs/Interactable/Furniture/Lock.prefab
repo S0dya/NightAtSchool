@@ -50,10 +50,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 100
   type: 2
-  name: Lock
-  actionSound: 
+  nameOfObj: 
+  cutsceneIndex: 0
   animator: {fileID: 0}
-  hidePosition: {x: 0, y: 0, z: 0}
+  newAreasForEnemy: []
+  indexOfHandObj: 0
+  neededInteraction: 0
+  objectsToAppear: []
+  hideTransform: {fileID: 0}
+  enemyTarget: {fileID: 0}
 --- !u!33 &2598218297575861304
 MeshFilter:
   m_ObjectHideFlags: 0

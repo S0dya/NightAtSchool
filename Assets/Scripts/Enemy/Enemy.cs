@@ -48,6 +48,7 @@ public class Enemy : SingletonMonobehaviour<Enemy> //only one enemy
 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         playerTransform = player.gameObject.transform;
+        StartCoroutine(BreatheCor());
     }
 
     void Update()
@@ -96,6 +97,14 @@ public class Enemy : SingletonMonobehaviour<Enemy> //only one enemy
 
         ChooseNextTarget(null);
     }
+    IEnumerator BreatheCor()
+    {
+        while (true)
+        {
+            AudioManager.I.PlayOneShot(AudioManager.I.EnemyBreath, transform.position);
+            yield return new WaitForSeconds(Random.Range(10f, 25f));
+        }
+    }
 
     public void ChooseNextTarget(Transform transform)
     {
@@ -138,6 +147,7 @@ public class Enemy : SingletonMonobehaviour<Enemy> //only one enemy
         {
             if (stopFollowingPlayerCor != null) StopCoroutine(stopFollowingPlayerCor);
             ChooseNextTarget(playerTransform);
+            AudioManager.I.EventInstancesDict["EnemySawPlayer"].start();
         }
         else
         {
@@ -149,14 +159,16 @@ public class Enemy : SingletonMonobehaviour<Enemy> //only one enemy
         yield return new WaitForSeconds(Random.Range(stopFollowingPlayerMinTime, stopFollowingPlayerMaxTime));
         isFollowingPlayer = false;
         target = transform;
+        AudioManager.I.EventInstancesDict["EnemyLostPlayer"].start();
     }
 
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.CompareTag("Player") && isFollowingPlayer && enemyVision.seesPlayer)
+        if (collision.CompareTag("Player"))
         {
+            InGameUI.I.ToggleInputFalse();
+            StopAllCoroutines();
             AudioManager.I.EventInstancesDict["Jumpscare"].start();
-            player.StopMoving();
             ScreamerUI.I.PlayScreamer();
         }
     }

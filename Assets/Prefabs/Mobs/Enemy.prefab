@@ -416,6 +416,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6346246571525194102, guid: 855cc61647df3194aa2cd144cab2e675,
         type: 3}
+      propertyPath: chooseRandomTargetMaxTime
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6346246571525194102, guid: 855cc61647df3194aa2cd144cab2e675,
+        type: 3}
       propertyPath: patrolPoints.Array.data[0]
       value: 
       objectReference: {fileID: 7549305191417904762}
@@ -459,6 +464,16 @@ PrefabInstance:
       propertyPath: patrolPoints.Array.data[8]
       value: 
       objectReference: {fileID: 1365140789}
+    - target: {fileID: 6346246571525194102, guid: 855cc61647df3194aa2cd144cab2e675,
+        type: 3}
+      propertyPath: stopFollowingPlayerMaxTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6346246571525194102, guid: 855cc61647df3194aa2cd144cab2e675,
+        type: 3}
+      propertyPath: stopFollowingPlayerMinTime
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6346246571525194103, guid: 855cc61647df3194aa2cd144cab2e675,
         type: 3}
       propertyPath: m_Name

@@ -19,7 +19,6 @@ public class Player : SingletonMonobehaviour<Player>
     [SerializeField] BoxCollider raycastCollider;
     [SerializeField] Enemy enemy;
 
-
     //local
     float verticalAngle;
     Vector3 characterVelocity;
@@ -105,7 +104,6 @@ public class Player : SingletonMonobehaviour<Player>
     public void PlayStepSound()
     {
         AudioManager.I.PlayOneShot("PlayerSteps");
-
 
         if (Vector3.Distance(transform.position, enemy.transform.position) < characterVelocity.magnitude * soundMultiplayer
         && !enemy.isFollowingPlayer && !enemy.sawPlayerBeforeHiding)

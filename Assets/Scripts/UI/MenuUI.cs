@@ -23,4 +23,9 @@ public class MenuUI : SingletonMonobehaviour<MenuUI>
     {
         Application.Quit();
     }
+
+    public void PlayButtonSound()
+    {
+        AudioManager.I.PlayButtonSound();
+    }
 }

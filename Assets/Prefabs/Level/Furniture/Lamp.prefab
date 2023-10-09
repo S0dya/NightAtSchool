@@ -43,6 +43,8 @@ GameObject:
   - component: {fileID: 4364009741422351068}
   - component: {fileID: 5891003628882508607}
   - component: {fileID: 4317619993886486225}
+  - component: {fileID: 5277965173364641587}
+  - component: {fileID: 8151677505260451246}
   m_Layer: 0
   m_Name: LightBulb
   m_TagString: Untagged
@@ -115,3 +117,32 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5277965173364641587
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7057675579119221557}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.011536395, y: 0.012130085, z: 0.019482607}
+  m_Center: {x: 0, y: 0, z: 0.009860627}
+--- !u!54 &8151677505260451246
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7057675579119221557}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
