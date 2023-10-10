@@ -15,8 +15,10 @@ public class LoadingSceneManager : SingletonMonobehaviour<LoadingSceneManager>
         base.Awake();
 
     }
-    void Start()
+
+    public void StartGame()
     {
+        AudioManager.I.EventInstancesDict["Music"].start();
         StartCoroutine(LoadSceneCor(-1, 1));
     }
 

@@ -57,8 +57,6 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
 
         EventInstancesDict.Add("ButtonPress", CreateInstance(ButtonPress));
 
-        EventInstancesDict["Music"].start();
-
         for (int i = 0; i < Settings.soundVolume.Length; i++)
         {
             ChangeVolume(i, Settings.soundVolume[i]);

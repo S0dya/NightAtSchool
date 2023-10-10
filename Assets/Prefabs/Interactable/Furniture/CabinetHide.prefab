@@ -43,7 +43,8 @@ GameObject:
   - component: {fileID: 708588074871231856}
   - component: {fileID: 708588074871231857}
   - component: {fileID: 708588074871231859}
-  m_Layer: 0
+  - component: {fileID: 708588074996618454}
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,6 +129,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0000005, y: 1.0000002, z: 1.0000099}
   m_Center: {x: 0.000002861023, y: 0.000002861023, z: 0.000015258789}
+--- !u!54 &708588074996618454
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708588074871231863}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &708588075633796110
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,7 +188,8 @@ GameObject:
   - component: {fileID: 708588076143180881}
   - component: {fileID: 708588076143180886}
   - component: {fileID: 708588076143180880}
-  m_Layer: 0
+  - component: {fileID: 708588074996618453}
+  m_Layer: 9
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,6 +274,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0000005, y: 1.0000002, z: 1.0000099}
   m_Center: {x: 0.0000019073486, y: 0, z: 0.000015258789}
+--- !u!54 &708588074996618453
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708588076143180884}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &708588076226844617
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,7 +302,8 @@ GameObject:
   - component: {fileID: 708588076226844618}
   - component: {fileID: 708588076226844619}
   - component: {fileID: 708588076226844613}
-  m_Layer: 0
+  - component: {fileID: 330734002}
+  m_Layer: 9
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -353,6 +388,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0000005, y: 1.0000002, z: 1.0000099}
   m_Center: {x: 0.0000019073486, y: 0, z: 0.000030517578}
+--- !u!54 &330734002
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708588076226844617}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &708588076401229192
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,7 +416,8 @@ GameObject:
   - component: {fileID: 708588076401229189}
   - component: {fileID: 708588076401229194}
   - component: {fileID: 708588076401229188}
-  m_Layer: 0
+  - component: {fileID: 1534564424}
+  m_Layer: 9
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -450,6 +502,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0000005, y: 1.0000002, z: 1.0000099}
   m_Center: {x: 0.0000019073486, y: 0, z: 0.000022888184}
+--- !u!54 &1534564424
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708588076401229192}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &867747186344585077
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,12 +530,13 @@ GameObject:
   - component: {fileID: 4644255125033268549}
   - component: {fileID: 7290301710724863323}
   - component: {fileID: 8332752613912123403}
-  m_Layer: 0
+  - component: {fileID: 708588074996618455}
+  m_Layer: 9
   m_Name: cabinet_rdoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &8332752613912123400
 Transform:
@@ -547,6 +616,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.006400005, y: 0.0007000026, z: 0.018400004}
   m_Center: {x: -0.0037700005, y: -0.0027000022, z: 0.010250002}
+--- !u!54 &708588074996618455
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867747186344585077}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2548354732386799131
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,7 +644,8 @@ GameObject:
   - component: {fileID: 9171025845847227316}
   - component: {fileID: 8757955887434728813}
   - component: {fileID: 9171025845847227319}
-  m_Layer: 0
+  - component: {fileID: 708588074996618457}
+  m_Layer: 9
   m_Name: cabinet_frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -644,6 +730,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.015000009, y: 0.0066709733, z: 0.020000003}
   m_Center: {x: 0.0000000074931545, y: -0.000835497, z: 0.010000001}
+--- !u!54 &708588074996618457
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2548354732386799131}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4178396588801553725
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,12 +758,13 @@ GameObject:
   - component: {fileID: 7482829797603553376}
   - component: {fileID: 589660308093511907}
   - component: {fileID: 7482829797603553379}
-  m_Layer: 0
+  - component: {fileID: 708588074996618456}
+  m_Layer: 9
   m_Name: cabinet_ldoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7207377784362067984
 Transform:
@@ -741,6 +844,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.0064000045, y: 0.00070000323, z: 0.018400002}
   m_Center: {x: 0.0037700085, y: -0.0027000117, z: 0.010250002}
+--- !u!54 &708588074996618456
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4178396588801553725}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4643331015808376719
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,7 +943,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
@@ -838,7 +957,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5351953135070414519}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CabinetHide
   m_TagString: Untagged
   m_Icon: {fileID: 0}

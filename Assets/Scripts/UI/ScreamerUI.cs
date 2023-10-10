@@ -16,6 +16,7 @@ public class ScreamerUI : SingletonMonobehaviour<ScreamerUI>
 
     public void PlayScreamer()
     {
+        AudioManager.I.EventInstancesDict["Jumpscare"].start();
         Destroy(Enemy.I.gameObject);
         GameManager.I.Open(CG, 0);
         videoPlayer.loopPointReached += OnVideoStopped;
@@ -26,6 +27,4 @@ public class ScreamerUI : SingletonMonobehaviour<ScreamerUI>
         GameManager.I.Close(CG, 0.1f);
         Player.I.Die();
     }
-
-    
 }

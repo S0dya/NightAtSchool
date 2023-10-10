@@ -91,9 +91,9 @@ public class Player : SingletonMonobehaviour<Player>
         while (true)
         {
             //x
-            transform.Rotate(new Vector3(0f, (POVJoystick.Direction.x * rotationSpeed), 0f), Space.Self);
+            transform.Rotate(new Vector3(0f, (POVJoystick.Direction.x * rotationSpeed * Time.deltaTime), 0f), Space.Self);
             //y
-            verticalAngle += -POVJoystick.Direction.y * rotationSpeed;
+            verticalAngle += -POVJoystick.Direction.y * rotationSpeed * Time.deltaTime;
             verticalAngle = Mathf.Clamp(verticalAngle, -89f, 89f);
             playerCamera.transform.localEulerAngles = new Vector3(verticalAngle, 0, 0);
             yield return null;

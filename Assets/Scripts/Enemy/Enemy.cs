@@ -145,12 +145,14 @@ public class Enemy : SingletonMonobehaviour<Enemy> //only one enemy
     {
         if (val)
         {
+            agent.speed = 5f;
             if (stopFollowingPlayerCor != null) StopCoroutine(stopFollowingPlayerCor);
             ChooseNextTarget(playerTransform);
             AudioManager.I.EventInstancesDict["EnemySawPlayer"].start();
         }
         else
         {
+            agent.speed = 3.5f;
             stopFollowingPlayerCor = StartCoroutine(StopFollowingPlayerCor());
         }
     }
@@ -168,7 +170,6 @@ public class Enemy : SingletonMonobehaviour<Enemy> //only one enemy
         {
             InGameUI.I.ToggleInputFalse();
             StopAllCoroutines();
-            AudioManager.I.EventInstancesDict["Jumpscare"].start();
             ScreamerUI.I.PlayScreamer();
         }
     }

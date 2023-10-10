@@ -16,7 +16,6 @@ public class SoundTrigger : MonoBehaviour
         enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
     }
 
-
     void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.layer == 9 || collision.gameObject.CompareTag("Interactable"))
